@@ -1,41 +1,40 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-interface ShoppingItem {
+export interface ShoppingItem {
   id: number;
   name: string;
   quantity: number;
   category: string;
   notes?: string;
   imageUrl?: string;
+  dateAdded?: string;
 }
 
-interface ShoppingState {
-  items: ShoppingItem[];
-}
+const savedLists: ShoppingItem[] = JSON.parse(localStorage.getItem("shoppingLists") || "[]");
 
-const initialState: ShoppingState = {
-  items: [],
+const initialState = {
+  lists: savedLists,
 };
 
 const shoppingSlice = createSlice({
-  name: 'shopping',
+  name: "shopping",
   initialState,
   reducers: {
-    setItems(state, action: PayloadAction<ShoppingItem[]>) {
-      state.items = action.payload;
+    addItem: (state, action: PayloadAction<ShoppingItem>) => {
+      state.lists.push(action.payload);
+      localStorage.setItem("shoppingLists", JSON.stringify(state.lists));
     },
-    addItem(state, action: PayloadAction<ShoppingItem>) {
-      state.items.push(action.payload);
+    updateItem: (state, action: PayloadAction<ShoppingItem>) => {
+      const index = state.lists.findIndex(item => item.id === action.payload.id);
+      if (index !== -1) state.lists[index] = action.payload;
+      localStorage.setItem("shoppingLists", JSON.stringify(state.lists));
     },
-    updateItem(state, action: PayloadAction<ShoppingItem>) {
-      const index = state.items.findIndex(item => item.id === action.payload.id);
-      if (index !== -1) state.items[index] = action.payload;
-    },
-    deleteItem(state, action: PayloadAction<number>) {
-      state.items = state.items.filter(item => item.id !== action.payload);
+    deleteItem: (state, action: PayloadAction<number>) => {
+      state.lists = state.lists.filter(item => item.id !== action.payload);
+      localStorage.setItem("shoppingLists", JSON.stringify(state.lists));
     },
   },
 });
 
-export const { setItems, addItem, updateItem, deleteItem } = shoppingSlice.actions;
+export const { addItem, updateItem, deleteItem } = shoppingSlice.actions;
 export default shoppingSlice.reducer;

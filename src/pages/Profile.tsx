@@ -1,31 +1,24 @@
-import { useState } from "react";
+import { useSelector } from "react-redux";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import InputField from "../components/InputField";
+import { RootState } from "../redux/store";
 
 const Profile = () => {
-  const [name, setName] = useState("John");
-  const [surname, setSurname] = useState("Doe");
-  const [email, setEmail] = useState("john@example.com");
-  const [cell, setCell] = useState("0123456789");
+  const user = useSelector((state: RootState) => state.auth.user);
 
-  const handleUpdate = () => {
-    console.log({ name, surname, email, cell });
-  };
+  if (!user) return <p>Loading...</p>;
 
   return (
-    <div className="app-container">
+    <div className="flex flex-col min-h-screen">
       <Header />
-      <main className="centered">
-        <div className="form-card">
-          <h1 className="form-title">Profile</h1>
-          <InputField type="text" placeholder="Name" value={name} onChange={setName} />
-          <InputField type="text" placeholder="Surname" value={surname} onChange={setSurname} />
-          <InputField type="email" placeholder="Email" value={email} onChange={setEmail} />
-          <InputField type="text" placeholder="Cell Number" value={cell} onChange={setCell} />
-          <button onClick={handleUpdate} className="btn primary-btn">
-            Update Profile
-          </button>
+      <main className="flex justify-center items-center flex-1">
+        <div className="bg-white p-8 rounded shadow-md w-80">
+          <h1 className="text-2xl font-bold mb-6 text-center">Profile</h1>
+          <InputField type="text" placeholder="Name" value={user.name} onChange={() => {}} />
+          <InputField type="text" placeholder="Surname" value={user.surname} onChange={() => {}} />
+          <InputField type="email" placeholder="Email" value={user.email} onChange={() => {}} />
+          <InputField type="text" placeholder="Cell Number" value={user.cell} onChange={() => {}} />
         </div>
       </main>
       <Footer />

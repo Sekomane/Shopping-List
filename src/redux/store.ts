@@ -1,6 +1,6 @@
-import { configureStore } from '@reduxjs/toolkit';
-import authReducer from './slices/authSlice';
-import shoppingReducer from './slices/shoppingSlice';
+import { configureStore } from "@reduxjs/toolkit";
+import authReducer from "./slices/authSlice";
+import shoppingReducer from "./slices/shoppingSlice";
 
 export const store = configureStore({
   reducer: {
@@ -9,6 +9,5 @@ export const store = configureStore({
   },
 });
 
-// Type definitions
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;

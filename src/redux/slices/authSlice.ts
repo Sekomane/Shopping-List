@@ -1,29 +1,45 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-interface AuthState {
-  user: null | { name: string; email: string };
-  token: string | null;
+interface User {
+  name: string;
+  surname: string;
+  email: string;
+  password: string;
+  cell: string;
 }
 
+interface AuthState {
+  token: string | null;
+  user: User | null;
+}
+
+const savedUser = JSON.parse(localStorage.getItem("user") || "null");
+const savedToken = localStorage.getItem("token") || null;
+
 const initialState: AuthState = {
-  user: null,
-  token: null,
+  token: savedToken,
+  user: savedUser,
 };
 
 const authSlice = createSlice({
-  name: 'auth',
+  name: "auth",
   initialState,
   reducers: {
-    loginSuccess(state, action: PayloadAction<{ user: any; token: string }>) {
-      state.user = action.payload.user;
+    login: (state, action: PayloadAction<{ token: string; user: User }>) => {
       state.token = action.payload.token;
+      state.user = action.payload.user;
+      localStorage.setItem("user", JSON.stringify(action.payload.user));
+      localStorage.setItem("token", action.payload.token);
     },
-    logout(state) {
-      state.user = null;
+    logout: (state) => {
       state.token = null;
+      state.user = null;
+      localStorage.removeItem("user");
+      localStorage.removeItem("token");
     },
   },
 });
 
-export const { loginSuccess, logout } = authSlice.actions;
+export const { login, logout } = authSlice.actions;
 export default authSlice.reducer;
+export type { User };

@@ -29,7 +29,7 @@ const ShoppingListCard = ({
       {notes && <p>Notes: {notes}</p>}
       <div className="card-actions">
         <button onClick={onEdit} className="btn edit">Edit</button>
-        <button onClick={onDelete} className="btn delete">Delete</button>
+        <button onClick={onDelete} className="btn delete">Remove</button>
       </div>
     </div>
   );
