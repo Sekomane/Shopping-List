@@ -1,12 +1,13 @@
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
+import "../index.css"; 
 
 const Header = () => {
   return (
-    <header className="bg-blue-500 text-white p-4 flex justify-between items-center">
-      <h1 className="text-xl font-bold">Shopping List App</h1>
-      <nav>
-        <Link to="/" className="mr-4 hover:underline">Home</Link>
-        <Link to="/profile" className="hover:underline">Profile</Link>
+    <header className="header">
+      <h1 className="header-title">Shopping List App</h1>
+      <nav className="header-nav">
+        <Link to="/" className="nav-link">Home</Link>
+        <Link to="/profile" className="nav-link">Profile</Link>
       </nav>
     </header>
   );

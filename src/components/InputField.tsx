@@ -2,7 +2,7 @@ interface InputFieldProps {
   type: string;
   placeholder: string;
   value: string;
-  onChange: (value: string) => void;
+  onChange: (val: string) => void;
 }
 
 const InputField = ({ type, placeholder, value, onChange }: InputFieldProps) => {
@@ -10,9 +10,9 @@ const InputField = ({ type, placeholder, value, onChange }: InputFieldProps) => 
     <input
       type={type}
       placeholder={placeholder}
+      className="form-input"
       value={value}
-      onChange={e => onChange(e.target.value)}
-      className="w-full p-2 mb-4 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+      onChange={(e) => onChange(e.target.value)}
     />
   );
 };
