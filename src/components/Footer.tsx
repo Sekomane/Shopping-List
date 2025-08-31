@@ -1,6 +1,6 @@
 const Footer = () => {
   return (
-    <footer className="bg-gray-200 text-center p-4 mt-auto">
+    <footer className="footer">
       &copy; 2025 Shopping List App. All rights reserved.
     </footer>
   );
