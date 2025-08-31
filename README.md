@@ -65,3 +65,12 @@ npm install
    ```
    npm start
    ```
+---
+
+## **Usage**
+
+-Register a new user or login with existing credentials.
+-Add new shopping list items with name, quantity, category, notes, and image.
+-Search or sort items using the search bar and dropdown.
+-Edit or delete items using the corresponding buttons.
+-Access the Profile page to view user details.
